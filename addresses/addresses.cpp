@@ -18,7 +18,7 @@ public:
 	Address(ifstream& fin) {
 		fin >> city >> street >> house >> appartment;
 	}
-	void get_output_address(std::ofstream& fout) {
+	void get_output_address(ofstream& fout) {
 		fout << (city + ", " + street + ", " + house + ", " + std::to_string(appartment)) << endl;
 	}
 };
