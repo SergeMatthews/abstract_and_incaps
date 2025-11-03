@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <string>
 #include <fstream>
 using std::string;
@@ -55,7 +55,7 @@ int main()
 	}
 
 	fout << AddressesNumber << endl;
-	for (int i = AddressesNumber - 1; i >= 0; --i) {
+	for (int i = 0; i < AddressesNumber; ++i) {
 		addressesList[i]->get_output_address(fout);
 	}
 	fout.close();
@@ -75,7 +75,7 @@ void InsertionSort(Address** arr, int size)
 		Address* key = arr[i];
 		int j = i - 1;
 
-		while (j >= 0 && (arr[j]->get_city().compare(key->get_city())) < 0)
+		while (j >= 0 && (arr[j]->get_city().compare(key->get_city())) > 0)
 		{
 			arr[j + 1] = arr[j];
 			j--;
@@ -83,4 +83,3 @@ void InsertionSort(Address** arr, int size)
 		arr[j + 1] = key;
 	}	
 }
-
