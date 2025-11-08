@@ -15,11 +15,12 @@ private:
 	string house{};
 	int appartment{};
 public:
-	Address(ifstream& fin) {
-		fin >> city >> street >> house >> appartment;
-	}
-	void get_output_address(ofstream& fout) {
-		fout << (city + ", " + street + ", " + house + ", " + std::to_string(appartment)) << endl;
+	Address(const std::string& city, const std::string& street, const std::string& house, const int& appartment) :
+		city(city), street(street), house(house), appartment(appartment)
+	{}
+
+	string get_output_address() {
+		return (city + ", " + street + ", " + house + ", " + std::to_string(appartment));
 	}
 	string get_city() {
 		return city;
@@ -42,7 +43,16 @@ int main()
 
 	Address** addressesList = new Address * [AddressesNumber];
 	for (int i = 0; i < AddressesNumber; ++i) {
-		addressesList[i] = new Address(fin);
+		string city_temp, street_temp, house_temp;
+		int appartment_temp;
+		if (!fin.eof()) {
+			fin >> city_temp;
+			fin >> street_temp;
+			fin >> house_temp;
+			fin >> appartment_temp;
+
+			addressesList[i] = new Address(city_temp, street_temp, house_temp, appartment_temp);
+		}
 	}
 	fin.close();
 
@@ -56,7 +66,7 @@ int main()
 
 	fout << AddressesNumber << endl;
 	for (int i = 0; i < AddressesNumber; ++i) {
-		addressesList[i]->get_output_address(fout);
+		fout << addressesList[i]->get_output_address() << endl ;
 	}
 	fout.close();
 
